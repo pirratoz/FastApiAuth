@@ -5,9 +5,13 @@ from app.dependencies import (
     Session,
     SessionReadOnly
 )
+from app.docs import Tags
+from app.routes import users
 
 
 app = FastAPI()
+
+app.include_router(users, tags=[Tags.users])
 
 app.dependency_overrides[Session] = Session.create_session
 app.dependency_overrides[SessionReadOnly] = SessionReadOnly.create_session
