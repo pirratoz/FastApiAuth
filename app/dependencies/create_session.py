@@ -1,8 +1,9 @@
 from abc import ABC
 
+from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from database import sessionmaker
+from app.database import sessionmaker
 
 
 class Session(ABC):
@@ -15,5 +16,5 @@ class Session(ABC):
 class SessionReadOnly(ABC):
     async def create_session() -> AsyncSession:
         async with sessionmaker() as session:
-            await session.execute("SET TRANSACTION READ ONLY")
+            await session.execute(text("SET TRANSACTION READ ONLY"))
             yield session

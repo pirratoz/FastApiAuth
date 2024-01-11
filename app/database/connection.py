@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker
 )
 
-from config import PostgresqlConfig
+from app.config import PostgresqlConfig
 
 
 engine = create_async_engine(url=PostgresqlConfig().DSN)
