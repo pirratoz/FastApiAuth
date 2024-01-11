@@ -11,5 +11,5 @@ class User(BaseModel):
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    email: Mapped[str] = mapped_column(nullable=False)
+    email: Mapped[str] = mapped_column(nullable=False, unique=True)
     password: Mapped[bytes] = mapped_column(BYTEA, nullable=False)
