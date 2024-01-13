@@ -3,7 +3,8 @@ from uvicorn import run as uvicorn_run
 
 from app.dependencies import (
     Session,
-    SessionReadOnly
+    SessionReadOnly,
+    IsAuth,
 )
 from app.docs import Tags
 from app.routes import users
@@ -15,6 +16,7 @@ app.include_router(users, tags=[Tags.users])
 
 app.dependency_overrides[Session] = Session.create_session
 app.dependency_overrides[SessionReadOnly] = SessionReadOnly.create_session
+app.dependency_overrides[IsAuth] = IsAuth.auth
 
 
 if __name__ == "__main__":
