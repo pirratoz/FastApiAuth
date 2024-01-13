@@ -38,5 +38,5 @@ def decode_jwt(
     return decode(
         jwt=access_token,
         key=key,
-        algorithm=[algorithm]
+        algorithms=[algorithm]
     )
