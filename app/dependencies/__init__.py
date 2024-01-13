@@ -5,7 +5,7 @@ __all__ = [
 ]
 
 
-from app.dependencies.create_session import (
+from app.dependencies.db_session import (
     Session,
     SessionReadOnly,
 )

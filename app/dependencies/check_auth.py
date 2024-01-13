@@ -14,7 +14,7 @@ from jwt.exceptions import (
     ExpiredSignatureError,
 )
 
-from app.dependencies.create_session import SessionReadOnly
+from app.dependencies.db_session import SessionReadOnly
 from app.repositories.user_repo import UserRepository
 from app.utils import decode_jwt
 
@@ -27,7 +27,7 @@ class IsAuth(ABC):
         session: SessionReadOnly = Depends()
     ) -> None:
         payload: dict[str, Any]
-        
+
         try:
             payload = decode_jwt(access_token=credentials.credentials)
         except ExpiredSignatureError:
