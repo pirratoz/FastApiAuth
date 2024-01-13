@@ -1,22 +1,19 @@
+__all__ = [
+    "UserManyResponse",
+    "UserResponse",
+    "TokenResponse",
+    "UserCreateRequest",
+    "UserLoginRequest",
+]
+
+
 from app.schemas.request import (
     UserCreateRequest,
-    UserLoginRequest
+    UserLoginRequest,
 )
 
 from app.schemas.response import (
     UserManyResponse,
     UserResponse,
-    TokenResponse
+    TokenResponse,
 )
-
-
-__all__ = [
-    "UserManyResponse",
-    "UserResponse",
-
-    "TokenResponse",
-
-    "UserCreateRequest",
-    
-    "UserLoginRequest"
-]

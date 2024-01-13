@@ -1,6 +1,6 @@
-from app.routes.users import users
-
-
 __all__ = [
-    "users"
+    "users",
 ]
+
+
+from app.routes.users import users

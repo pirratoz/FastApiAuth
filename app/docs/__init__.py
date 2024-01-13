@@ -1,6 +1,6 @@
-from app.docs.tags import Tags
-
-
 __all__ = [
-    "Tags"
+    "Tags",
 ]
+
+
+from app.docs.tags import Tags

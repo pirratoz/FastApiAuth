@@ -1,6 +1,6 @@
-from app.database.connection import sessionmaker
-
-
 __all__ = [
-    "sessionmaker"
+    "sessionmaker",
 ]
+
+
+from app.database.connection import sessionmaker
