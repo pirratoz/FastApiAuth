@@ -12,19 +12,24 @@ from app.config import PostgresqlConfig
 
 
 class DatabaseConnector(ABC):
-    engine = create_async_engine(url=PostgresqlConfig().DSN)
-    sessionmaker = async_sessionmaker(engine, expire_on_commit=False)
+    def __init__(self) -> None:
+        self.engine = create_async_engine(url=PostgresqlConfig().DSN)
+        self.sessionmaker = async_sessionmaker(self.engine, expire_on_commit=False)
+    
+    async def get_session(self) -> AsyncSession:
+        async with self.sessionmaker() as session:
+            yield session
+    
+
+    async def get_session_read_only(self) -> AsyncSession:
+        async with self.sessionmaker() as session:
+            await session.execute(text("SET TRANSACTION READ ONLY"))
+            yield session
 
 
 class Session(ABC):
-    async def create_session() -> AsyncSession:
-        async with DatabaseConnector.sessionmaker() as session:
-            yield session
-            await session.commit()
+    ...
 
 
 class SessionReadOnly(ABC):
-    async def create_session() -> AsyncSession:
-        async with DatabaseConnector.sessionmaker() as session:
-            await session.execute(text("SET TRANSACTION READ ONLY"))
-            yield session
+    ...
