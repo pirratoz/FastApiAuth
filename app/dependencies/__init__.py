@@ -1,7 +1,7 @@
 __all__ = [
     "Session",
     "SessionReadOnly",
-    "IsAuth",
+    "Auth",
     "DatabaseConnector",
 ]
 
@@ -11,4 +11,4 @@ from app.dependencies.db_session import (
     SessionReadOnly,
     DatabaseConnector,
 )
-from app.dependencies.check_auth import IsAuth
+from app.dependencies.check_auth import Auth

@@ -1,4 +1,7 @@
-from typing import Annotated
+from typing import (
+    Annotated,
+    Any,
+)
 
 from fastapi import (
     APIRouter,
@@ -15,7 +18,7 @@ from app.usecases import (
 from app.dependencies import (
     Session,
     SessionReadOnly,
-    IsAuth,
+    Auth,
 )
 from app.schemas.response.user_schema import (
     UserManyResponse,
@@ -32,7 +35,7 @@ from app.schemas.response import (
 users = APIRouter()
 
 
-@users.get("/", response_model=UserManyResponse, dependencies=[Depends(IsAuth.auth)])
+@users.get("/", response_model=UserManyResponse, dependencies=[Depends(Auth.auth)])
 async def get_users(
     session: SessionReadOnly = Depends()
 ) -> UserManyResponse:
@@ -62,3 +65,10 @@ async def user_login(
         UserRepository(session)
     ).execute(user_data)
     return token
+
+
+@users.get("/payload", response_model=dict[str, Any])
+async def get_payload(
+    payload: Auth = Depends()
+) -> dict[str, Any]:
+    return payload

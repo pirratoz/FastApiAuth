@@ -5,7 +5,7 @@ from app.dependencies import (
     Session,
     SessionReadOnly,
     DatabaseConnector,
-    IsAuth,
+    Auth,
 )
 from app.docs import Tags
 from app.routers import users
@@ -14,7 +14,7 @@ from app.routers import users
 def setup_dependency(app: FastAPI, db: DatabaseConnector) -> None:
     app.dependency_overrides[Session] = db.get_session
     app.dependency_overrides[SessionReadOnly] = db.get_session_read_only
-    app.dependency_overrides[IsAuth] = IsAuth.auth
+    app.dependency_overrides[Auth] = Auth.auth
 
 
 def include_routers(app: FastAPI) -> None:

@@ -19,13 +19,19 @@ from app.repositories.user_repo import UserRepository
 from app.utils import decode_jwt
 
 
-class IsAuth(ABC):
+class Auth(ABC):
     security = HTTPBearer()
+
+    # for openapi docs
+    def __init__(self,
+        credentials: HTTPAuthorizationCredentials = Depends(security) 
+    ) -> None:
+        ...
 
     async def auth(
         credentials: HTTPAuthorizationCredentials = Depends(security),
         session: SessionReadOnly = Depends()
-    ) -> None:
+    ) -> dict[str, Any]:
         payload: dict[str, Any]
 
         try:
@@ -50,3 +56,5 @@ class IsAuth(ABC):
                 status_code=401,
                 detail="Unauthorized"
             )
+
+        return payload
