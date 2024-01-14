@@ -19,6 +19,7 @@ class DatabaseConnector(ABC):
     async def get_session(self) -> AsyncSession:
         async with self.sessionmaker() as session:
             yield session
+            await session.commit()
     
 
     async def get_session_read_only(self) -> AsyncSession:
